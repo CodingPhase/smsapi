@@ -3,15 +3,18 @@
 namespace NotificationChannels\SMSApi;
 
 use NotificationChannels\SMSApi\Exceptions\CouldNotSendNotification;
+use SMSApi\Exception\SmsapiException;
 use NotificationChannels\SMSApi\Events\MessageWasSent;
 use NotificationChannels\SMSApi\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
 class SMSApiChannel
 {
-    public function __construct()
+    protected $smsapi;
+
+    public function __construct(SMSApi $smsapi)
     {
-        // Initialisation code here
+        $this->smsapi = $smsapi;
     }
 
     /**
@@ -24,6 +27,23 @@ class SMSApiChannel
      */
     public function send($notifiable, Notification $notification)
     {
+        $message = $notification->toSMSApi($notifiable);
+
+        if($message->to) {
+            $message->to($notifiable->getUserPhoneNumber());
+        }
+
+        try {
+            $response = $this->smsapi->send($message);
+
+            foreach ($response->getList() as $status) {
+                echo $status->getNumber() . ' ' . $status->getPoints() . ' ' . $status->getStatus();
+            }
+        } catch (SmsapiException $exception) {
+            echo 'ERROR: ' . $exception->getMessage();
+        }
+
+
         //$response = [a call to the api of your notification send]
 
 //        if ($response->error) { // replace this by the code need to check for errors

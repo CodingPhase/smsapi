@@ -15,10 +15,8 @@ https://laravel.com/docs/master/notifications
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/smsapi/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/smsapi/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsapi.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsapi)
 
-This package makes it easy to send notifications using [SMSApi](link to service) with Laravel 5.3.
+This package makes it easy to send notifications using [SMSApi](https://www.smsapi.pl) with Laravel 5.3+.
 
-**Note:** Replace ```SMSApi``` ```SMSApi``` ```Piotr Łosiak``` ```Hesto``` ```http://``` ```losiakp@gmail.com``` ```smsapi``` ```SMSApi Notifications channel for Laravel 5.3+``` ```:style_ci_id``` ```:sensio_labs_id``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md), [composer.json](composer.json) and other files, then delete this line.
-**Tip:** Use "Find in Path/Files" in your code editor to find these keywords within the package directory and replace all occurences with your specified term.
 
 This is where your description should go. Add a little code example so build can understand real quick how the package can be used. Try and limit it to a paragraph or two.
 
