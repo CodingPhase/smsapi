@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\SMSApi\\": "src"
+            "CodingPhase\\SMSApi\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\SMSApi\\Test\\": "tests"
+            "CodingPhase\\SMSApi\\Test\\": "tests"
         }
     },
     "scripts": {
