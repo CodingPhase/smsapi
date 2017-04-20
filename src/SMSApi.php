@@ -1,14 +1,9 @@
 <?php
 
-namespace NotificationChannels\SMSApi;
+namespace CodingPhase\SMSApi;
 
 use SMSApi\Client;
 use SMSApi\Api\SmsFactory;
-use SMSApi\Exception\SmsapiException;
-use NotificationChannels\SMSApi\Exceptions\CouldNotSendNotification;
-use NotificationChannels\SMSApi\Events\MessageWasSent;
-use NotificationChannels\SMSApi\Events\SendingMessage;
-use Illuminate\Notifications\Notification;
 
 class SMSApi
 {
@@ -27,7 +22,7 @@ class SMSApi
 
         $actionSend->setTo($message->to);
         $actionSend->setText($message->content);
-        $actionSend->setSender('Info');
+        $actionSend->setSender($message->from);
 
         return $actionSend->execute();
     }

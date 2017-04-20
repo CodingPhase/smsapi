@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\SMSApi;
+namespace CodingPhase\SMSApi;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +20,6 @@ class SMSApiServiceProvider extends ServiceProvider
                     $config['token']
                 );
             });
-
     }
 
     /**
@@ -28,5 +27,6 @@ class SMSApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //
     }
 }

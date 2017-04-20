@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\SMSApi;
+namespace CodingPhase\SMSApi;
 
 use Illuminate\Support\Arr;
 
@@ -12,6 +12,13 @@ class SMSApiMessage
      * @var string
      */
     public $to = '';
+
+    /**
+     * The phone number the message should be sent from.
+     *
+     * @var string
+     */
+    public $from = 'Info';
 
     /**
      * The message content.
@@ -55,15 +62,29 @@ class SMSApiMessage
     }
 
     /**
-     * Set the phone number or sender name the message should be sent from.
+     * Set the phone number the message should be sent to.
      *
-     * @param  string $from
+     * @param $to
      *
      * @return $this
      */
     public function to($to)
     {
         $this->to = $to;
+
+        return $this;
+    }
+
+    /**
+     * Set the Sender name the message should be sent from.
+     *
+     * @param $from
+     *
+     * @return $this
+     */
+    public function from($from)
+    {
+        $this->from = $from;
 
         return $this;
     }

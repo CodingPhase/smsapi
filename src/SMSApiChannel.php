@@ -1,17 +1,19 @@
 <?php
 
-namespace NotificationChannels\SMSApi;
+namespace CodingPhase\SMSApi;
 
-use NotificationChannels\SMSApi\Exceptions\CouldNotSendNotification;
+use CodingPhase\SMSApi\Exceptions\CouldNotSendNotification;
 use SMSApi\Exception\SmsapiException;
-use NotificationChannels\SMSApi\Events\MessageWasSent;
-use NotificationChannels\SMSApi\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
 class SMSApiChannel
 {
     protected $smsapi;
 
+    /**
+     * SMSApiChannel constructor.
+     * @param SMSApi $smsapi
+     */
     public function __construct(SMSApi $smsapi)
     {
         $this->smsapi = $smsapi;
@@ -23,31 +25,24 @@ class SMSApiChannel
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
-     * @throws \NotificationChannels\SMSApi\Exceptions\CouldNotSendNotification
+     * @throws \CodingPhase\SMSApi\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
         $message = $notification->toSMSApi($notifiable);
 
-        if($message->to) {
-            $message->to($notifiable->getUserPhoneNumber());
+        if (! $message->to) {
+            $phoneNumber = $notifiable->getUserPhoneNumber();
+            if (empty($phoneNumber)) {
+                $message->to();
+                throw CouldNotSendNotification::missingRecipient();
+            }
         }
 
         try {
-            $response = $this->smsapi->send($message);
-
-            foreach ($response->getList() as $status) {
-                echo $status->getNumber() . ' ' . $status->getPoints() . ' ' . $status->getStatus();
-            }
+            $this->smsapi->send($message);
         } catch (SmsapiException $exception) {
-            echo 'ERROR: ' . $exception->getMessage();
+            throw CouldNotSendNotification::serviceRespondedWithAnError($exception);
         }
-
-
-        //$response = [a call to the api of your notification send]
-
-//        if ($response->error) { // replace this by the code need to check for errors
-//            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
-//        }
     }
 }
