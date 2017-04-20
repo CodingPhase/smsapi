@@ -1,0 +1,40 @@
+{
+    "name": "codingphase/smsapi",
+    "description": "SMSApi Notifications channel for Laravel 5.3+",
+    "homepage": "https://github.com/laravel-notification-channels/smsapi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Piotr Łosiak",
+            "email": "losiakp@gmail.com",
+            "homepage": "http://",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/notifications": "^5.3",
+        "illuminate/support": "^5.1|^5.2|^5.3",
+        "smsapi/php-client": "^1.8"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.5",
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\SMSApi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\SMSApi\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
